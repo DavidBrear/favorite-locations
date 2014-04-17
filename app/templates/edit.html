@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Edit Your Profile</h1>
+<form action="" method="post" name="edit">
+    {{form.hidden_tag()}}
+    Your nickname:
+    {{form.nickname(class='form-control')}}
+    {% if form.errors.nickname %}
+      <div class='alert alert-danger'>
+        {% for error in form.errors.nickname %}
+          {{error}}
+        {% endfor %}
+      </div>
+    {% endif %}
+    <br>
+    <input type="submit" value="Save Changes" class='btn btn-default'>
+</form>
+{% endblock %}

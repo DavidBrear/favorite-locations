@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>
+    {{ user.nickname }}
+    <img class='img-rounded profile-image' src="{{user.avatar(128)}}"/>
+  </h1>
+  <h3>
+    {% if user.last_login %}
+    {{user.nickname}} last logged in <strong>{{ user.last_login }}</strong>
+    {% endif %}
+  </h3>
+  {% if user.id == g.user.id %}
+    <a href='{{url_for("edit")}}'>Edit Profile</a>
+  {% endif %}
+
+  <div class='locations'>
+    <h4>Favorite Locations</h4>
+    {% if locations %}
+      <ul>
+        {% for location in locations %}
+          {% include 'location.html' %}
+        {% endfor %}
+      </ul>
+    {% else %}
+      <h6>{{user.nickname}} has not specified any favorite locations. </h6>
+    {% endif %}
+  </div>
+{% endblock %}

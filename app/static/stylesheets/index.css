@@ -1,0 +1,74 @@
+body, html{
+  height: 100%;
+}
+#map-canvas {
+  height: 100%;
+}
+#favorites-nav .navbar {
+  background-color: #f0f0f0;
+}
+#favorites-nav .navbar-toggle .icon-bar {
+  background-color: #000;
+}
+#favorites-nav .navbar .map-location,#favorites-nav  .navbar .remove {
+  padding: 5px;
+}
+#favorites-nav .navbar .remove {
+  float: right;
+  margin-top: -30px;
+}
+#favorites-nav .navbar .map-location {
+  width: 100%;
+}
+#address-search {
+  line-height: 2.5em;
+  margin-top: 10%;
+  font-size: 2em;
+  width:85%;
+  display: none;
+  height: 2.5em;
+}
+.navbar {
+  margin: 0;
+}
+@media (min-width: 768px) {
+  #favorite-list .remove {
+    visibility: hidden;
+  }
+  #favorite-list .btn-group:hover .remove {
+    visibility: visible;
+  }
+  #favorite-list .btn-group {
+    position: relative;
+  }
+  #favorite-list .map-location{
+    width: 100%;
+  }
+  #favorite-list .btn-group .remove {
+    position: absolute;
+    top: 3px;
+    right: -30px;
+    bottom: 0;
+    width: 30px;
+    margin: 0;
+
+  }
+  #favorites-nav .navbar {
+    background-color: #fff;
+  }
+  .favorites {
+    padding-right: 0;
+    padding-left: 30px;
+  }
+  #favorites-nav .navbar-header {
+    float: none;
+    width: 100%;
+  }
+  #favorites-nav .navbar-nav {
+    width: 100%;
+  }
+  #favorites-nav .navbar-nav li {
+    display: block;
+    width: 100%;
+  }
+}

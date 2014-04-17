@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+  <form action='' method='post' name='registration-form'>
+    {{form.hidden_tag()}}
+    <div class='form-group'>
+      {{form.email(class='form-control', placeholder='Email')}}
+      {% for error in form.errors.email %}
+        <div class='alert alert-danger'>{{error}}</div>
+      {% endfor %}
+    </div>
+    <div class='form-group'>
+      {{form.password(class='form-control', placeholder='Password')}}
+      {% for error in form.errors.password %}
+        <div class='alert alert-danger'>{{error}}</div>
+      {% endfor%}
+    </div>
+    <div class='form-group'>
+      {{form.password_confirm(class='form-control', placeholder='Confirm Password')}}
+    </div>
+    <div class='form-group'>
+      <input type='submit' value='Register' class='btn btn-default btn-lg'>
+    </div>
+  </form>
+
+{% endblock %}
