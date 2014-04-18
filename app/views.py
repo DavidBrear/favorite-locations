@@ -97,7 +97,7 @@ def login():
         session['remember_me'] = form.remember_me.data
         if form.email.data is not None:
             user = User.query.filter_by(email=form.email.data).first()
-            if user.authenticate(form.password.data):
+            if user and user.authenticate(form.password.data):
                 login_user(user)
                 return redirect(url_for('index'))
             else:
