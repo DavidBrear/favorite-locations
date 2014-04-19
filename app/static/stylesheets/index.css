@@ -1,15 +1,6 @@
 body, html{
   height: 100%;
 }
-.btn.btn-default {
-  border-radius: 2px;
-  background-color: #fff;
-  background-image: linear-gradient(top, rgba(255,255,255,255) 0%, rgba(247,247,247,255) 51%, rgba(240,240,240,255) 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(255,255,255,255)), color-stop(0.5109697, rgba(247,247,247,255)), color-stop(1, rgba(240,240,240,255)));
-  background-image: -moz-linear-gradient(top, rgba(255,255,255,255) 0%, rgba(247,247,247,255) 51%, rgba(240,240,240,255) 100%);
-  background-image: -o-linear-gradient(top, rgba(255,255,255,255) 0%, rgba(247,247,247,255) 51%, rgba(240,240,240,255) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f7f7f7'endColorstr='#f0f0f0');
-}
 #map-canvas {
   height: 100%;
 }
@@ -53,14 +44,16 @@ body, html{
   #favorite-list .map-location{
     width: 100%;
   }
+  #favorite-list .btn-group .remove .glyphicon {
+    top: 4px;
+  }
   #favorite-list .btn-group .remove {
     position: absolute;
-    top: 3px;
     right: -30px;
     bottom: 0;
     width: 30px;
     margin: 0;
-
+    height: 100%;
   }
   #favorites-nav .navbar {
     background-color: #fff;
