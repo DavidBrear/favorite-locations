@@ -41,7 +41,7 @@ def after_login(resp):
         session.pop('remember_me', None)
 
     login_user(user, remember = remember_me)
-    return redirect(request.args.get('next') or url_for('index'))
+    return redirect(request.args.get('next') or url_for('map'))
 
 @lm.user_loader
 def load_user(id):
@@ -50,11 +50,16 @@ def load_user(id):
 # ROUTES
 @app.route('/')
 @app.route('/index')
-@login_required
 def index():
+    return render_template('index.html', title = 'Home')
+
+
+@app.route('/map')
+@login_required
+def map():
     user = g.user
     form = LocationForm()
-    return render_template('index.html',
+    return render_template('map.html',
             title = 'Home',
             form = form,
             locations= user.locations,
@@ -99,7 +104,7 @@ def login():
             user = User.query.filter_by(email=form.email.data).first()
             if user and user.authenticate(form.password.data):
                 login_user(user)
-                return redirect(url_for('index'))
+                return redirect(url_for('map'))
             else:
                 flash('Invalid email/password')
         else:
