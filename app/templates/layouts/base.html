@@ -1,0 +1,60 @@
+<!doctype HTML>
+
+<html>
+  <head>
+    {% block head %}
+      <title>{% block title %}Favorites App{% endblock %}</title>
+    {% endblock %}
+
+    {% block styles %}
+      <link rel='stylesheet' type='text/css' href='//netdna.bootstrapcdn.com/bootswatch/3.1.1/yeti/bootstrap.min.css'>
+      <link rel='stylesheet' type='text/css' href='/static/stylesheets/base.css'>
+      <link rel='stylesheet' type='text/css' href='/static/stylesheets/components.css'>
+    {% endblock %}
+
+    {% block scripts %}
+      <script src="//ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+      <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+      <script src="//documentcloud.github.com/underscore/underscore-min.js"></script>
+      <script src="//documentcloud.github.com/backbone/backbone-min.js"></script>
+      <script type='text/javascript' src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
+    {% endblock %}
+
+    {% block meta %}
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    {% endblock %}
+  </head>
+  <body>
+    {% block fullpage %}
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Favorites</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              {% if g.user.is_authenticated() %}
+                <li><a href="/map">Map</a></li>
+                <li><a href="{{url_for('users', id=g.user.id)}}">My Profile</a></li>
+                <li><a href="/logout">Log out</a></li>
+              {% else %}
+                <li><a href="/login">Log in / Register</a></li>
+              {% endif %}
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>

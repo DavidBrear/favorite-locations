@@ -1,4 +1,4 @@
-var FavoritesIndex = function() {
+var FavoritesMap = function() {
   this.map = undefined;
   this.markers = {};
   this.setMarkers = function(marker_locations) {
@@ -16,7 +16,8 @@ var FavoritesIndex = function() {
     self.markers = {};
     var mapOptions = {
       center: new google.maps.LatLng(latitude, longitude),
-      zoom: 14
+      zoom: 14,
+      disableDefaultUI: true
     };
     self.map = new google.maps.Map(document.getElementById("map-canvas"),
         mapOptions);
@@ -35,8 +36,8 @@ var FavoritesIndex = function() {
       var $this = $(this);
       evt.preventDefault();
       self.markers[$this.data('address')].setMap(null);
-      $.post('/locations/delete/' + $this.data('id')).done(function(data, status) {
-        $this.closest('.btn-group').slideUp(function(){ $(this).remove();});
+      $.post('/api/locations/' + $this.data('id') + '/delete').done(function(data, status) {
+        $this.closest('li.favorite').slideUp(function(){ $(this).remove();});
       }).fail(function(txt){ console.log(txt); });
     });
 
@@ -44,6 +45,7 @@ var FavoritesIndex = function() {
     self.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     google.maps.event.addListener(map, 'click', function(evt) {
       $('#address-search').fadeOut();
+      $('.gm-style').removeClass('active');
     });
 
     var autocomplete = new google.maps.places.Autocomplete(
@@ -56,9 +58,10 @@ var FavoritesIndex = function() {
     });
     $('#location-search').click(function(evt){
       evt.preventDefault();
-      $('#address-search').fadeIn(function() {
+      $('#address-search').val('').fadeIn(function() {
         $(this).focus();
       });
+      $('.gm-style').addClass('active');
     });
 
   };
@@ -100,23 +103,16 @@ var FavoritesIndex = function() {
   };
   return this;
 }
-function LocationLink(data){
-  var li = $('<li></li>').addClass('btn-group');
-  var link = $('<a></a>').addClass('map-location btn btn-sm btn-default').attr('href', '#').attr('data-latitude', data.latitude).attr('data-longitude', data.longitude);
-  var remove = $('<a></a>').addClass('btn remove').attr('href', '#').attr('data-address', data.address).attr('data-id', data.id);
-  remove.html('<span class="glyphicon glyphicon-remove"></span>');
-  link.html(data.name);
-  li.append(link);
-  li.append(remove);
-  return li;
+function LocationLink(json){
+  var loc = new Location(json);
+  return new LocationView({model: loc}).render().el;
 }
 
-var fav = FavoritesIndex();
+var fav = FavoritesMap();
 google.maps.event.addDomListener(window, 'load', fav.getLocation);
 $(function() {
   $('#location-edit-form').submit(function(evt) {
     evt.preventDefault();
-    var location_action = document.getElementById('loc-action');
     var location_id = document.getElementById('loc-id');
     var csrf = $('#csrf_token').val();
     var location_params = {
@@ -127,20 +123,21 @@ $(function() {
     }
     if (location_params.name.trim() !== '') {
 
-      var action = !!location_action ? location_action.value : 'create';
       var id = !!location_id ? '/' + location_id.value : '';
 
-      $.post('/locations/'+action+id, {
+      $.post('/api/locations'+id, {
         csrf_token: csrf,
         name: location_params.name,
         latitude: location_params.latitude,
         longitude: location_params.longitude,
         address: location_params.address
       }).done( function(data, success) {
-        $('#favorite-list').append(LocationLink(data));
+        var json = JSON.parse(data);
+        $('#favorite-list').append(LocationLink(json));
         $('#address-confirm-modal').modal('hide');
         $('#address-search').fadeOut();
-        fav.go_to(data);
+        $('.gm-style').removeClass('active');
+        fav.go_to(json);
       }).fail( function(txt){
         console.log('failed', txt);
       });

@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<div class='col-xs-12 col-md-6'>
+  <div class='pull-left'>
+    <img class='img-rounded profile-image' src="{{user.avatar(128)}}"/>
+  </div>
+  <div class='pull-left' style='margin: 0; margin-left: 10px;'>
+    <!-- yeah I did inline style. If you dont like it, bite me.-->
+    <h1>{{user.nickname}}</h1>
+    <small>
+      {% if user.last_login %}
+      Last logged in <strong>{{ user.last_login }}</strong>
+      {% endif %}
+    </small>
+  </div>
+</div>
+<div class='col-xs-12 col-md-6'>
+  <div class='panel panel-default'>
+    <div class='locations'>
+      <div class='panel-heading'>
+        <h4 class='panel-title strong'>Favorite Locations</h4>
+      </div>
+      <div class='panel-body'>
+        {% if locations %}
+          <ul>
+            {% for location in locations %}
+              {% include 'location.html' %}
+            {% endfor %}
+          </ul>
+        {% else %}
+          <h6>{{user.nickname}} has not specified any favorite locations. </h6>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

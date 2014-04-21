@@ -1,6 +1,6 @@
 var LocationView = Backbone.View.extend({
   tagName: 'li',
-  className: 'btn-group',
+  className: 'favorite',
   template: _.template($('#location-template').html()),
   initialize: function(options) {
     this.model.on('change', this.render, this);

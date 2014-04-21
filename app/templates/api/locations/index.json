@@ -1,0 +1,7 @@
+[
+  {% for location in locations %}
+    {
+      "name": "{{location.name}}"
+    },
+  {% endfor %}
+]

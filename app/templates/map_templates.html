@@ -1,0 +1,10 @@
+<script type='text/template' id='location-template'>
+<div class="input-group p100">
+  <button type="button" class="map-location form-control btn btn-default btn-sm" data-longitude='<%= longitude %>' data-latitude='<%= latitude %>'>
+   <strong><%= name %></strong><br><small class='hidden-xs'>(<%= address %>)</small>
+ </button>
+  <span class="input-group-btn">
+    <button type="button" class='btn btn-danger dropdown-toggle btn-sm remove' data-address='<%= address %>' data-id='<%= id %>'> <span class='glyphicon glyphicon-remove'></span> </button>
+  </span>
+</div>
+</script>

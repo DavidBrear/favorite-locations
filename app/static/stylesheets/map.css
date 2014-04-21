@@ -1,0 +1,65 @@
+body, html{
+  height: 100%;
+}
+#map-canvas {
+  height: 100%;
+}
+.navbar-toggle .icon-bar {
+  margin: 0 auto;
+}
+.btn.btn-add-location {
+  margin: 3px;
+  border-radius: 3px;
+  color: #353535;
+  background-color: #fff;
+  line-height: 18px;
+  padding: 9px;
+}
+.btn.btn-add-location:hover {
+  color: #252525;
+}
+#address-search {
+  display: none;
+}
+@media (min-width: 768px) {
+  #address-search {
+    margin-left: 2%;
+    width: 96%;
+    margin-top: 50px;
+    font-size: 3em;
+    line-height: 3em;
+    height: 3em;
+  }
+}
+@media (max-width: 768px) {
+  #address-search {
+    margin-top: 50px;
+    font-size: 2.75em
+    line-height: 2.75em;
+    height: 2.75em;
+    margin-left: 1%;
+    width: 98%;
+  }
+}
+.gm-style {
+  background-color: #252525;
+}
+.gm-style.active div {
+  opacity: .7;
+}
+@media (min-width: 768px) {
+  .favorite {
+    width: 300px;
+  }
+  .map-location, .map-location small {
+    height: 43px;
+    max-width: 258px;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+  }
+  .remove {
+    height: 43px;
+  }
+}
