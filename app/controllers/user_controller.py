@@ -9,5 +9,6 @@ class UserController(BaseController):
 
     def show(self, id):
         user = User.query.filter_by(id=id).first()
-        return render_template('/users/show.html', user=user);
+        locations = user.locations.all()
+        return render_template('/users/show.html', user=user, locations=locations);
 
