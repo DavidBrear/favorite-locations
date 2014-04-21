@@ -3,7 +3,7 @@
 {% block content %}
   <div class="jumbotron">
   <h1>Favorites App</h1>
-  <p>Keep Track of your favorite locations in one place!</p>
+  <p>Keep track of your favorite locations in one place!</p>
   {% if g.user.is_authenticated() %}
     <p><a class="btn btn-primary btn-lg" href='/map' role="button">Start adding places!</a></p>
   {% else %}
